@@ -59,12 +59,58 @@ This investigation sheet helps you gather key technical information from the thr
 
 | Criteria | Details |
 |---------|---------|
-| API Provider (Choose one) | **OpenWeather, OpenWeatherMap (or other – provide details)** |
+| API Provider (OpenWeatherMap) | **OpenWeather, OpenWeatherMap (or other – provide details)** |
 | API Base URL | `_______________________________` |
-| Endpoint for current weather | `_______________________________` |
+| Endpoint for current weather | `` |
 | Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
-| Sample JSON response (formatted example) |  
+| Required query parameters | `key:q;value=London.
+key:appid;value=fd54cefecad481234d577ac3200920c8,key:units;value=metric` |
+| Sample JSON response ({
+    "coord": {
+        "lon": -0.1257,
+        "lat": 51.5085
+    },
+    "weather": [
+        {
+            "id": 803,
+            "main": "Clouds",
+            "description": "broken clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 21.02,
+        "feels_like": 21.34,
+        "temp_min": 19.99,
+        "temp_max": 22.25,
+        "pressure": 1012,
+        "humidity": 83,
+        "sea_level": 1012,
+        "grnd_level": 1009
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 6.7,
+        "deg": 202,
+        "gust": 9.2
+    },
+    "clouds": {
+        "all": 70
+    },
+    "dt": 1790764567,
+    "sys": {
+        "type": 2,
+        "id": 2075535,
+        "country": "GB",
+        "sunrise": 1790747944,
+        "sunset": 1790790114
+    },
+    "timezone": 3600,
+    "id": 2643743,
+    "name": "London",
+    "cod": 200
+}) |  
 ```
 
 ```
