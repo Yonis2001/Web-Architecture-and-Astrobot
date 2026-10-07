@@ -13,10 +13,10 @@ This investigation sheet helps you gather key technical information from the thr
 |---------|---------|
 | API Base URL | `https://webexapis.com/v1/rooms` |
 | Authentication Method | `Bearer Token` |
-| Endpoint to list rooms | `https://developer.webex.com/messaging/docs/api/v1/messages/list-messages` |
-| Endpoint to get messages | `https://developer.webex.com/messaging/docs/api/v1/messages/get-message-details` |
-| Endpoint to send message | `` |
-| Required headers | `_______________________________` |
+| Endpoint to list rooms | `https://webexapis.com/v1/room/tabs?roomId= ` |
+| Endpoint to get messages | `https://webexapis.com/v1/messages/{messageId} \` |
+| Endpoint to send message | `https://webexapis.com/v1/messages \` |
+| Required headers | `'Authorization: Bearer ZWIzY2QzZTItOTU0YS00M2Q4LWFjNDUtMTllMTc0NTY0ZGU3ODAyNWU4Y2MtMmJk_PE93_c18e13ae-5575-4bc0-ae01-e48905f14f17' 'Accept: application/json'` |
 | Sample full GET or POST request | `_______________________________` |
 
 ---
