@@ -15,7 +15,7 @@ This investigation sheet helps you gather key technical information from the thr
 | Authentication Method | `Bearer Token` |
 | Endpoint to list rooms | `https://developer.webex.com/messaging/docs/api/v1/messages/list-messages` |
 | Endpoint to get messages | `https://developer.webex.com/messaging/docs/api/v1/messages/get-message-details` |
-| Endpoint to send message | `https://developer.webex.com/messaging/docs/api/v1/messages/create-a-message` |
+| Endpoint to send message | `` |
 | Required headers | `_______________________________` |
 | Sample full GET or POST request | `_______________________________` |
 
