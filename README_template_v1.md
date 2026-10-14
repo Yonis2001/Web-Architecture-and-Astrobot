@@ -126,9 +126,9 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | API Provider (OpenWeatherMap) | **OpenWeather, OpenWeatherMap (or other – provide details)** |
-| API Base URL | `_______________________________` |
-| Endpoint for current weather | `` |
-| Authentication method | `_______________________________` |
+| API Base URL | `https://openweathermap.org/` |
+| Endpoint for current weather | `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}` |
+| Authentication method | `Appid` |
 | Required query parameters | `key:q;value=London.
 key:appid;value=fd54cefecad481234d577ac3200920c8,key:units;value=metric` |
 | Sample JSON response ({
