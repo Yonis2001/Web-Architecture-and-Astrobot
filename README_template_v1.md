@@ -202,10 +202,10 @@ key:appid;value=fd54cefecad481234d577ac3200920c8,key:units;value=metric` |
 
 | Criteria | Details |
 |---------|---------|
-| API Provider | '_________' |
-| API Base URL | `_______________________________` |
-| Endpoint | `_______________________________` |
-| Authentication method | `_______________________________` |
+| API Provider | 'AstronomyAPI' |
+| API Base URL | `https://docs.astronomyapi.com/` |
+| Endpoint | `` |
+| Authentication method | `` |
 | Required query parameters | `_______________________________` |
 | Sample JSON response (formatted example) |  
 ```
