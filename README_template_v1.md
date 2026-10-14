@@ -67,6 +67,13 @@ This investigation sheet helps you gather key technical information from the thr
         "lon": 10.13,
         "lat": 51.51
     },
+
+| Sample JSON response (formatted example) |  
+```
+   "coord": {
+        "lon": 10.13,
+        "lat": 51.51
+    },
     "weather": [
         {
             "id": 803,
@@ -108,9 +115,6 @@ This investigation sheet helps you gather key technical information from the thr
     "name": "Landolfshausen",
     "cod": 200
 }` |
-| Sample JSON response (formatted example) |  
-```
-
 ```
 |
 
