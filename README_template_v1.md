@@ -57,12 +57,57 @@ This investigation sheet helps you gather key technical information from the thr
 | Criteria | Details |
 |---------|---------|
 | Provider used (Choose one) | **LocationIQ / Mapbox/ OpenWeatherMap other -provide detail** |
-| API Base URL | `_______________________________` |
-| Endpoint for geocoding | `_______________________________` |
-| Endpoint for reverse geocoding | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
-| Sample request with latitude/longitude | `_______________________________` |
+| API Base URL | `https://openweathermap.org/` |
+| Endpoint for geocoding | `https://openweathermap.org/api/geocoding-api?collection=other` |
+| Endpoint for reverse geocoding | `https://openweathermap.org/api/geocoding-api?collection=other#reverse` |
+| Authentication method | `appid` |
+| Required query parameters | `q,appid,units` |
+| Sample request with latitude/longitude | `
+    "coord": {
+        "lon": 10.13,
+        "lat": 51.51
+    },
+    "weather": [
+        {
+            "id": 803,
+            "main": "Clouds",
+            "description": "broken clouds",
+            "icon": "04d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 13.72,
+        "feels_like": 13.29,
+        "temp_min": 12.28,
+        "temp_max": 13.99,
+        "pressure": 1030,
+        "humidity": 82,
+        "sea_level": 1030,
+        "grnd_level": 1000
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.69,
+        "deg": 278,
+        "gust": 8.01
+    },
+    "clouds": {
+        "all": 84
+    },
+    "dt": 1791972733,
+    "sys": {
+        "type": 2,
+        "id": 197911,
+        "country": "DE",
+        "sunrise": 1791956469,
+        "sunset": 1791995375
+    },
+    "timezone": 7200,
+    "id": 6552341,
+    "name": "Landolfshausen",
+    "cod": 200
+}` |
 | Sample JSON response (formatted example) |  
 ```
 
