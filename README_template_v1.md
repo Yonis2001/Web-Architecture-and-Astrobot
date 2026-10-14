@@ -17,7 +17,17 @@ This investigation sheet helps you gather key technical information from the thr
 | Endpoint to get messages | `https://webexapis.com/v1/messages/{messageId} \` |
 | Endpoint to send message | `https://webexapis.com/v1/messages \` |
 | Required headers | `'Authorization: Bearer ZWIzY2QzZTItOTU0YS00M2Q4LWFjNDUtMTllMTc0NTY0ZGU3ODAyNWU4Y2MtMmJk_PE93_c18e13ae-5575-4bc0-ae01-e48905f14f17' 'Accept: application/json'` |
-| Sample full GET or POST request | `_______________________________` |
+| Sample full GET or POST request | `
+"id": "Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1JPT00vNzEyOWNhYjAtYjczNS0xMWYxLTg3ZGItMTMxNmExYmNlYzEx",
+            "title": "Welcome space",
+            "type": "group",
+            "lastActivity": "2026-09-23T09:59:18.701Z",
+            "creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS80N2FkZjFmZS02NmNkLTRiNTAtYWI4YS1lNjdkOGVhNTJmZmM",
+            "created": "2026-09-23T09:59:18.491Z",
+            "ownerId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jMThlMTNhZS01NTc1LTRiYzAtYWUwMS1lNDg5MDVmMTRmMTc",
+            "isPublic": false,
+            "isReadOnly": false,
+            "isLocked": false` |
 
 ---
 
