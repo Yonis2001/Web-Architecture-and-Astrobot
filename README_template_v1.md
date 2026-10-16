@@ -204,10 +204,74 @@ key:appid;value=fd54cefecad481234d577ac3200920c8,key:units;value=metric` |
 |---------|---------|
 | API Provider | 'AstronomyAPI' |
 | API Base URL | `https://docs.astronomyapi.com/` |
-| Endpoint | `` |
-| Authentication method | `` |
-| Required query parameters | `_______________________________` |
-| Sample JSON response (formatted example) |  
+| Endpoint | `https://api.astronomyapi.com/api/v2/bodies` |
+| Authentication method | `HTTP Basic authentication , Application id and Application secret` |
+| Required query parameters | `Longitude,Latitude,From Date,To Date,Time,Coordinates` |
+| Sample JSON response ({
+  "data": {
+    "dates": {
+      "from": "2026-10-16T12:48:26.000-04:00",
+      "to": "2026-10-16T12:48:26.000-04:00"
+    },
+    "observer": {
+      "location": {
+        "longitude": -84.39733,
+        "latitude": 33.775867,
+        "elevation": 1
+      }
+    },
+    "table": {
+      "header": [
+        "2026-10-16T12:48:26.000-04:00"
+      ],
+      "rows": [
+        {
+          "entry": {
+            "id": "sun",
+            "name": "Sun"
+          },
+          "cells": [
+            {
+              "date": "2026-10-16T12:48:26.000-04:00",
+              "id": "sun",
+              "name": "Sun",
+              "distance": {
+                "fromEarth": {
+                  "au": "0.99684",
+                  "km": "149125725.47307"
+                }
+              },
+              "position": {
+                "horizontal": {
+                  "altitude": {
+                    "degrees": "46.39",
+                    "string": "46° 23' 24\""
+                  },
+                  "azimuth": {
+                    "degrees": "167.54",
+                    "string": "167° 32' 24\""
+                  }
+                },
+                "horizonal": {
+                  "altitude": {
+                    "degrees": "46.39",
+                    "string": "46° 23' 24\""
+                  },
+                  "azimuth": {
+                    "degrees": "167.54",
+                    "string": "167° 32' 24\""
+                  }
+                },
+                "equatorial": {
+                  "rightAscension": {
+                    "hours": "13.42",
+                    "string": "13h 25m 12s"
+                  },
+                  "declination": {
+                    "degrees": "-8.93",
+                    "string": "-9° 4' 12\""
+                  }
+                },) |  
 ```
 
 ```
