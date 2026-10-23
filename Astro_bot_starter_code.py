@@ -129,10 +129,10 @@ def get_weather(city, api_key):
 # ISS FUNCTIONS
 # =========================
 def reverse_geocode(lat, lon, api_key):
-    url = #complete the URL to fetch reverse geocoding data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, limit, and the API key
+    url = "http://api.openweathermap.org/geo/1.0/reverse"
+    params = {"lat": lat, "lon": lon, "limit": 1, "appid": api_key}
 
-    response = requests.#complete(url, params=params)
+    response = requests.get(url,params=params)
 
     if response.status_code != 200:
         return None
@@ -142,28 +142,30 @@ def reverse_geocode(lat, lon, api_key):
 
 
 def get_iss_location(api_key):
-    url = #complete the URL to fetch ISS current location from the Open Notify API
-
-    response = requests.#complete(#complete)
+    url ="http://api.open-notify.org/iss-now.json"
+    response = requests.get(url)
 
     if response.status_code != 200:
-        return #complete the return statement to indicate whether ISS location retrieved or not
+        return "could not get the iss location now"
 
     data = response.json()
 
-    lat = data[#complete][#complete]
-    lon = data[#complete][#complete]
+    lat = data["iss_position"]["latitude"]
+    lon = data["iss_position"]["longitude"]
 
     location = reverse_geocode(lat, lon, api_key)
 
     place = "Over Ocean / No Nearby City"
 
     if location:
-        place = #
+        place = f"{location.get('name','unknown')},{location.get('country','')}"
 
     return (
-        #complete the return statement to format and return the ISS location information including latitude, longitude, and place name
-    )
+       f"ISS Position at {when}\n"
+       f"Latitude:{lat}\n"
+       f"Longitude:{lon}\n"
+       f"Near":{place}
+       )
 
 # =========================
 # MAIN BOT LOGIC
@@ -180,7 +182,7 @@ def main():
     rooms = get_rooms(token)
 
     if not rooms:
-        print(#complete the print statement )
+        print("No rooms.")
         return
 
     print_rooms(rooms)
@@ -196,9 +198,9 @@ def main():
 
             last_message_id = message_id
 
-            print(#complete the print statement to display the received message text)
+            print("Recieved",message_text)
 
-            if not message_text.startswith(#complete):
+            if not message_text.startswith("/"):
                 continue
 
             if message_text.lower() == "/help":
@@ -208,7 +210,7 @@ def main():
                     "/weather <city>\n/iss\n/help\n/quit"
                 )
 
-            elif message_text.lower().startswith(#complete):
+            elif message_text.lower().startswith("/weather"):
 
                 parts = message_text.split(maxsplit=1)
 
