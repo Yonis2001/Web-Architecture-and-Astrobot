@@ -7,7 +7,6 @@
 # =========================
 # REQUIRED LIBRARIES
 # =========================
-
 import requests
 import json
 import time
@@ -24,8 +23,10 @@ def get_webex_token():
         return "Bearer YOUR_WEBEX_TOKEN"
 
 def get_api_key(prompt, hardcoded_key):
-  #complete the function to get the API key from user input or use a hardcoded key
-
+  choice = input(f"Use the hard-coded {prompt}? (y/n): ").lower()
+  if choice=="n":
+      return input(f"Enter your {prompt}? ").strip()
+  return hardcoded_key
 # =========================
 # WEBEX FUNCTIONS
 # =========================
@@ -152,19 +153,20 @@ def get_iss_location(api_key):
 
     lat = data["iss_position"]["latitude"]
     lon = data["iss_position"]["longitude"]
-
+    
+    
+    when = time.strftime("%Y-%m-%d %H:%M:%S UTC",time.gmtime(data["timestamp"]))
     location = reverse_geocode(lat, lon, api_key)
-
     place = "Over Ocean / No Nearby City"
 
     if location:
-        place = f"{location.get('name','unknown')},{location.get('country','')}"
+        place= f"{location.get('name','unknown')},{location.get('country','')}"
 
     return (
        f"ISS Position at {when}\n"
        f"Latitude:{lat}\n"
        f"Longitude:{lon}\n"
-       f"Near":{place}
+       f"Near:{place}"
        )
 
 # =========================
