@@ -10,7 +10,7 @@
 import requests
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 # =========================
 # CONFIGURATION FUNCTIONS
 # =========================
@@ -168,6 +168,37 @@ def get_iss_location(api_key):
        f"Longitude:{lon}\n"
        f"Near:{place}"
        )
+# =========================
+# Astronomy Functions
+# =========================
+def get_sky(city,weather_key,app_id,app_secret):
+    location=get_city_coordinates(city,weather_key)
+    if not location:
+        return f"City '{city}' not found."
+    now=datetime.now(timezone.utc)
+    url="https://api.astronomyapi.com/api/v2/bodies/positions"
+    params={
+        "latitude": location["lat"],
+        "longitude": location["lon"],
+        "elevation":0,
+        "from_date": now.strftime("%Y-%m-%d"),
+        "to_date":now.strftime("%Y-%m-%d"),
+        "time":now.strftime("%H:%M:%S")
+    }
+    response=requests.get(url,params=params,auth=(app_id,app_secret),timeout=15)
+    if response.status_code !=200:
+        return "Could not get sky data."
+    rows=response.json()["data"]["table"]["rows"]
+    result=f"Sky over {location['name']} now:\n"
+    for row in rows:
+        name=row["entry"]["name"]
+        height=float(row["cells"][0]["position"]["horizontal"]["altitude"]["degrees"])
+        if height>0:
+            result+=f"{name}: {height:.2f} degrees above horizon\n"
+        else:
+            result+=f"{name}: below horizon\n"
+    return result
+
 
 # =========================
 # MAIN BOT LOGIC
@@ -180,7 +211,8 @@ def main():
         "Weather API key",
         "YOUR_OPENWEATHER_API_KEY"
     )
-
+    astro_id=get_api_key("Astronomy API ID","YOUR_APP_ID")
+    astro_secret = get_api_key("Astronomy API Application Secret","YOUR_APP_SECRET")
     rooms = get_rooms(token)
 
     if not rooms:
@@ -209,7 +241,7 @@ def main():
                 send_message(
                     token,
                     room_id,
-                    "\n/weather <city>\n/iss\n/help\n/quit"
+                    "commands:/weather <city>, /iss, /sky <city>, /help,/quit"
                 )
 
             elif message_text.lower().startswith("/weather"):
@@ -228,7 +260,13 @@ def main():
             elif message_text.lower() == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
                 break
-
+            elif message_text.lower().startswith("/sky"):
+                parts = message_text.split(maxsplit=1)
+                if len(parts) < 2:
+                    send_message(token, room_id, "Usage: /sky <city>")
+                else:
+                    city = parts[1]
+                    send_message(token, room_id, get_sky(city, weather_key, astro_id, astro_secret))
             else:
                 send_message(token, room_id, "Unknown command. Use /help")
 
