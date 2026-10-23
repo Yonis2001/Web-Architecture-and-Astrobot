@@ -58,7 +58,7 @@ def select_room(rooms):
 
 
 def get_latest_message(token, room_id):
-    url ="https://webxapis.com/v1/messages"
+    url ="https://webexapis.com/v1/messages"
     params = {"roomId":room_id, "max": 1}
     headers ={"Authorization":token}
 
@@ -77,20 +77,20 @@ def get_latest_message(token, room_id):
 
 
 def send_message(token, room_id, message):
-    url = "https://webxapis.com/v1/messages"
+    url = "https://webexapis.com/v1/messages"
     headers ={"Authorization":token,
               "Content-Type":"application/json"}
     data = {
         "roomId": room_id,
         "text": message
     }
-    requests.pist(url, headers=headers, data=json.dumps(data))
+    requests.post(url, headers=headers, data=json.dumps(data))
 
 # =========================
 # WEATHER FUNCTIONS
 # =========================
 def get_city_coordinates(city, api_key):
-    url ="http://api.openweathermap.orh/geo/1.0/direct"
+    url ="http://api.openweathermap.org/geo/1.0/direct"
     params ={"q":city,"limit":1,"appid":api_key}
     response = requests.get(url, params=params)
 
@@ -109,7 +109,7 @@ def get_weather(city, api_key):
 
     url = "https://api.openweathermap.org/data/2.5/weather"
     params = {
-        "lat":location["lat"],"Lon":location["Lon"],"units":"metric","appid":api_key
+        "lat":location["lat"],"lon":location["lon"],"units":"metric","appid":api_key
     }
 
     response = requests.get(url,params=params)
@@ -209,7 +209,7 @@ def main():
                 send_message(
                     token,
                     room_id,
-                    "/weather <city>\n/iss\n/help\n/quit"
+                    "\n/weather <city>\n/iss\n/help\n/quit"
                 )
 
             elif message_text.lower().startswith("/weather"):
@@ -222,10 +222,10 @@ def main():
                     city = parts[1]
                     send_message(token, room_id, get_weather(city, weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/iss":
                 send_message(token, room_id, get_iss_location(weather_key))
 
-            elif message_text.lower() == "#complete":
+            elif message_text.lower() == "/quit":
                 send_message(token, room_id, "AstroBot shutting down.")
                 break
 
