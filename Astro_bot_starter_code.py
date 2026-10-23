@@ -78,7 +78,7 @@ def get_latest_message(token, room_id):
 def send_message(token, room_id, message):
     url = "https://webxapis.com/v1/messages"
     headers ={"Authorization":token,
-              "Content-Type":application/json}
+              "Content-Type":"application/json"}
     data = {
         "roomId": room_id,
         "text": message
@@ -89,9 +89,9 @@ def send_message(token, room_id, message):
 # WEATHER FUNCTIONS
 # =========================
 def get_city_coordinates(city, api_key):
-    url = #complete the URL to fetch city coordinates from OpenWeatherMap API
-    params = #complete the params dictionary to include the city name, limit, and the API key
-    response = requests.#complete(url, params=params)
+    url ="http://api.openweathermap.orh/geo/1.0/direct"
+    params ={"q":city,"limit":1,"appid":api_key}
+    response = requests.get(url, params=params)
 
     if response.status_code != 200:
         return None
@@ -104,20 +104,25 @@ def get_weather(city, api_key):
     location = get_city_coordinates(city, api_key)
 
     if not location:
-        return #complete the return statement to indicate that the city was not found
+        return f"City '{city}' not found."
 
-    url = #complete the URL to fetch weather data from OpenWeatherMap API
-    params = #complete the params dictionary to include the latitude, longitude, units as metric, and the API key
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "lat":location["lat"],"Lon":location["Lon"],"units":"metric","appid":api_key
+    }
 
-    response = requests.#complete(url, params=params)
+    response = requests.get(url,params=params)
 
     if response.status_code != 200:
-        return #complete the return statement to indicate that the wheather weather data retrieved or not
-
+        return "Could not get weather data "
     weather = response.json()
 
     return (
-        #complete the return statement to format and return the weather information such as including city name, country, temperature, weather description, humidity, and wind speed
+        f"Weather in {weather['name']},{weather['sys']['country']}\n"
+        f"Temperature:{weather['main']['temp']} C\n"
+        f"Condtions: {weather['weather'][0]['description']}\n"
+        f"Humidity :{weather['main']['humidity']}%\n"
+        f"Wind speed: {weather['wind']['speed']}m/s"
     )
 
 # =========================
