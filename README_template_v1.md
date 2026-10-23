@@ -289,26 +289,36 @@ In this section, evaluate how web technologies, architecture, and design pattern
 
 Explain how the client–server model applies to your AstroBot:
 
-- Identify the **client** 
-- Identify the **server(s)** 
+- Client:The astrobot python bot I built using the requests library to send hhtp requests.The webex app also is a client used to create test room.
+- servers: The servers include webex to send messages , openweathermap,opennotify and astronomy api.
 - Describe how data flows between:
-  - User, AstroBot and APIs
+  - User inputs what he wants like sending a message to AstroBot , astro requests and checks to find the message on webex. APIs send the data to astrobot and it turns the message into something very readable for a human.
 
 Include a **simple block diagram** to illustrate this interaction.
-
+user--> webex-->astrobot-->apis-->astrobot-->webex
 ####  Security Considerations: (3 marks )
-- Consider but not limiting to secure handling of API keys and tokens, API rate limiting, and Input validation (e.g., handling user commands safely), include examples from code where necessary to illustrate.
+API keys arent stored in the code but as a placeholder. ,this additionally stops leaks happening on hubs like github .Futhermore you cant access it without the keys from an external source like webex. Webex for example also have a 12 hour time limit on each bearer code so you must go back and change the keys.
+example of security cinsideration in my code|:
+def get_webex_token():
+    choice = input("Use hard-coded Webex token? (y/n): ").lower()
+    if choice == "n":
+        token = input("Enter your Webex Access Token: ")
+        return f"Bearer {token}"
+    else:
+        return "Bearer YOUR_WEBEX_TOKEN"
 
----
 
 ###  RESTful API Usage in Your Application (3 marks )
 
 Explain how REST APIs are used in your AstroBot: 
 
-- Describe how HTTP methods (GET, POST) are used  
-- Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)  
+- Describe how HTTP methods (GET, POST) are used
+Astrobot I built uses GET to read date and POST to create data.
+  
+- Explain how your bot interacts with APIs (Webex, Weather, ISS, Geocoding)
+webex uses bearer token to list rooms , and post replies. OpenWeather and geocdoing return data for \weather and \iss .AstronomyAPI uses some command chains APIs for example /sky geocoding to astronomyAPI.
 - Describe how JSON responses are received and processed  
-
+each function checks response.status_code,converts with response.json(),extracts fields such as weather['main][/temp']
 Note: Relate your explanation directly to your code for higher grade. 
 
 #### Security Considerations: (2 marks)
@@ -323,22 +333,27 @@ Provide a short example based on your implementation
 
 | Component   | Description and Example (Relate to your Bot) |
 |------------|----------------------------------|
-| **Model**  |  |
-| **View**   |  |
-| **Controller** |  |
+| **Model**  | The data layer.Functions fetch and proccess data from apis and return readable data.For example get_weather() returns weather data |
+| **View**   | What the user sees. Send_message() posts the formatted text into the Webex space ,for example "/weather london" and the terminal prints recieved and u see the weather in London |
+| **Controller** | The main() function loop. It polls for new messages and get_latest_message(),reads the command(/weather,/iss,/sky,/help,/quit) |
 
 ---
-
+short example: User asks fot /sky London. The controller detects the comman , the model (get_sky) retrieves the data from the APIs and the view send_message delivers the formatted answer to the user in webex.
 ### 📝 Reflection and Evaluation ( 8 marks )
 
 Reflect on your AstroBot (400 words):
 
-- How effective is your bot in meeting the Astronomy Club’s needs?  
-- What design decisions worked well?  
-- What challenges did you face when integrating APIs?  
-- What security risks did you identify and how were they handled?  
-- How could your solution be improved in the future?  
+- How effective is your bot in meeting the Astronomy Club’s needs?
+The Astrobot meets the astronomy clubs’ standards. The design was simplified and allows club members to type /Weather(Returns the weather report for a city),/iss(longitude and latitude),/sky (returns planets positions over cities )in to the chatbot or Webex space and get answers for those questions. 
+- What design decisions worked well?
+  The structure of the starter code worked very well , each feature has its own purpose for Webex , weather ,ISS and Astronomy so I added a new function and a new command branch.I reused function get_city_coordinates for both weather and sky to avoid coupling and code being duplicated.
+- What challenges did you face when integrating APIs?
+The main challenge I faced when integrating the APIs was the different authentication methods example using bearer tokens for Webex and api id and secret for astronomy .Testing is an issue as openweather key takes time to activate and other issues would be that after 12 hours the Webex token expires and needs to be refreshed.
+- What security risks did you identify and how were they handled?
+The major security risk I had during the process of building astrobot is leaking the api keys and credentials. The source uses text placeholders and real value are entered into the terminal. Webex personal tokens expire after 12 hours which also helps security even though it might hurt convenience.I also noted that the input() shows typed keys on the screen which can be seen in the demo video.I replaced those with keys afterwards.
 
+- How could your solution be improved in the future?  
+I would use exact command matches and checking the length of city to reduce the amount of times api is called .I would also filter the /sky command just to display visible planets/bodies such as moon mars sun etc.
 ---
 
  **Tip:** Link your answers directly to your code and examples for higher marks.
